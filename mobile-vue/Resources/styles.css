@@ -1,0 +1,48 @@
+/* APP */
+
+.app-screen {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+.screen-container {
+  margin: 10px;
+}
+.info-container {
+  margin: 10px;
+}
+
+/* SCREEN */
+
+.screen-img {
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
+}
+.screen-card {
+  width: 100%;
+  border-radius: 10px;
+}
+.screen-card {
+  border: #ccc solid 4px;
+  border-top-width: 30px;
+}
+.screen-url {
+  cursor: default !important;
+  position: absolute;
+  max-width: 500px;
+  padding: 0px 30px 0px 5px;
+  height: 20px;
+  top: -25px;
+  left: 20px;
+
+  border-radius: 10px;
+  background-color: white;
+
+  font-size: 0.9em;
+  color: #ccc;
+}
+.screen-x {
+  position: absolute;
+  top: -25px;
+  right: 0px;
+  color: #999 !important;
+}
