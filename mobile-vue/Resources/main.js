@@ -6,12 +6,28 @@ const pages = data.pages;
 console.log({ title, pages });
 
 Vue.component('screen', {
-  props: ['imgsrc'],
+  props: ['currentPage'],
   template: `
   <md-card class="screen-card">
     <span class="screen-url">https://www.example.com/</span>
     <md-icon class="screen-x">clear</md-icon>
-    <img class="screen-img" v-bind:src="imgsrc" />
+    <img
+      class="screen-img"
+      width="145" height="126" 
+      v-bind:src="currentPage.src"
+      usemap="#btnmap" 
+    />
+    <map name="btnmap">
+      <area
+        v-for="p in currentPage.areas"
+        :id="p.href"
+        :href="p.href"
+        :shape="p.shape"
+        :href="p.href"
+        :alt="p.title"
+        :coords="p.coords"
+      />
+    </map>
   </md-card>  
   `
 });
@@ -72,7 +88,9 @@ const App = {
       <div class="app-screen md-layout md-alignment-center">
         <div class="md-layout-item md-xlarge-size-70 md-large-size-60 md-xsmall-size-100">
           <div class="screen-container">
-            <screen v-bind:imgsrc="currentPage.src" />
+            <screen 
+              v-bind:currentPage="currentPage" 
+            />
           </div>
         </div>
         <div class="md-layout-item md-xlarge-size-30 md-large-size-40 md-xsmall-size-100">
@@ -117,8 +135,6 @@ new Vue({
 // Get data
 
 function getData() {
-  let i, p;
-
   // Get page
   const page = document.querySelector('#page');
 
@@ -128,20 +144,37 @@ function getData() {
   // Get all pages
   const pagesElements = page.querySelectorAll('.Page');
   const pages = [];
-  for (i = 0; i < pagesElements.length; i++) {
-    p = pagesElements[i];
+  for (let i = 0; i < pagesElements.length; i++) {
+    const p = pagesElements[i];
+    const pageTitle = p.querySelector('.Texts .Title').textContent;
+    const hasNotes =
+      p.querySelector('.Texts .Note') &&
+      p.querySelector('.Texts .Note').nextElementSibling;
+    let notes;
+    if (hasNotes) {
+      notes = p.querySelector('.Texts .Note').nextElementSibling.innerHTML;
+    }
+    const pageImg = p.querySelector('.Image img').src;
+    const pageImgMap = p.querySelector('.Image map');
+    const hasMaps = !!pageImgMap;
+    const areas = Array.from(pageImgMap.areas);
+    const areasMap = areas.map(area => {
+      return {
+        shape: area.shape,
+        coords: area.coords,
+        href: area.href,
+        title: area.title,
+      }
+    })
+    if (hasMaps) {
+      pageImgMap;
+    }
     pages.push({
       id: p.id,
-      title: p.querySelector('.Texts .Title').textContent,
-      note:
-        p.querySelector('.Texts .Note') &&
-        p.querySelector('.Texts .Note').nextElementSibling
-          ? p.querySelector('.Texts .Note').nextElementSibling.innerHTML
-          : '',
-      src: p.querySelector('.Image img').src,
-      map: p.querySelector('.Image map')
-        ? p.querySelector('.Image map')
-        : '',
+      title: pageTitle,
+      note: notes,
+      src: pageImg,
+      areas: areasMap,
       index: i
     });
   }
