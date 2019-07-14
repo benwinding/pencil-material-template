@@ -11,11 +11,12 @@ Vue.component('screen', {
     <md-card class="screen-card">
       <span class="screen-url">https://www.example.com/</span>
       <md-icon class="screen-x">clear</md-icon>
-      <img
+      <div class="img-container">
+        <img
         class="screen-img"
-        width="145" height="126" 
         v-bind:src="currentPage.src"
-      />
+        />
+      </div>
       <div v-if="highlightBtns" class="screen-btns-overlay">
         <router-link
           v-for="area in currentPage.areas"
@@ -92,14 +93,14 @@ const App = {
     <div>
       <md-toolbar class="md-primary">
         <div class="md-toolbar-row">
-          <div class="md-toolbar-section-start">
+          <div class="md-toolbar-section-start has-ellipsis">
             <md-button class="md-icon-button">
               <md-icon>view_carousel</md-icon>
             </md-button>
-            <h3 class="md-title">{{title}}</h3>
+            <span class="md-title">{{title}}</span>
           </div>
 
-          <div class="md-toolbar-section-end">
+          <div>
             <md-button class="md-icon-button">
               <md-icon>fullscreen</md-icon>
             </md-button>
@@ -141,11 +142,6 @@ const App = {
     },
     currentPageId() {
       return this.$route.params.id;
-    }
-  },
-  watch:{
-    $route: function(to, from) {
-      console.log({to, from})
     }
   },
   mounted() {

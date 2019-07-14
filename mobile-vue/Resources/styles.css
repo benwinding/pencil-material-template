@@ -1,21 +1,29 @@
 /* APP */
 
 .app-screen {
+  margin: auto;
+  max-width: 1200px;
   width: 100%;
   height: calc(100vh - 64px);
 }
 .screen-container {
   margin: 10px;
+  max-width: fit-content;
+  float: right;
 }
 .info-container {
   margin: 10px;
 }
+.has-ellipsis {
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
 
 /* SCREEN */
-
 .screen-img {
-  width: 100%;
   border-radius: 0px 0px 5px 5px;
+  max-height: 80vh;
 }
 .screen-btns-overlay {
   position: absolute;
@@ -27,10 +35,8 @@
 
 .screen-card {
   width: 100%;
-  border-radius: 10px;
-}
-.screen-card {
   border: #ccc solid 4px;
+  border-radius: 10px;
   border-top-width: 30px;
 }
 .screen-url {
@@ -41,16 +47,28 @@
   height: 20px;
   top: -25px;
   left: 20px;
-
   border-radius: 10px;
   background-color: white;
-
   font-size: 0.9em;
   color: #ccc;
+  overflow-x: hidden;
+  width: 60%;
 }
 .screen-x {
   position: absolute;
   top: -25px;
   right: 0px;
   color: #999 !important;
+}
+
+@media (max-width: 599px) {
+  .screen-img {
+    max-height: unset;
+    width: 100%;
+  }
+  .screen-container {
+    width: calc(100% - 20px);
+    max-width: unset;
+    margin: 10px;
+  }
 }
