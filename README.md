@@ -46,3 +46,9 @@ Use these collections from [Nathaniel Watson](http://www.nwatson.nz/):
 
 - ![profile](https://avatars.githubusercontent.com/DaniGuardiola?s=30) - [DaniGuardiola](https://github.com/DaniGuardiola)
 - ![profile](https://avatars.githubusercontent.com/benwinding?s=30) - [benwinding](https://github.com/benwinding)
+
+# Dev
+
+``` bash
+browser-sync mobile-vue/ -w --port 4000
+```

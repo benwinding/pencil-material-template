@@ -18,10 +18,7 @@
       rel="stylesheet"
       href="https://unpkg.com/vue-material/dist/theme/default.css"
     />
-    <link
-      rel="stylesheet"
-      href="/Resources/styles.css"
-    />
+    <link rel="stylesheet" href="/Resources/styles.css" />
   </head>
 
   <body>
@@ -29,6 +26,108 @@
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
     <script src="https://unpkg.com/vue-router@3.0.7/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vue-material@1.0.0-beta-11/dist/vue-material.min.js"></script>
+    <div style="display: none;" id="page">
+      <div id="content">
+        <h1 id="documentTitle"><span>The Comm Book - Mock GUI</span></h1>
+        <div class="Page" id="conversations_page">
+          <div class="Texts">
+            <h2 class="Title">Conversations</h2>
+            <p class="Note"></p>
+            <div>
+              This page is to list the active conversations that the user is
+              engaged in.
+              <strong>BOLD</strong>
+            </div>
+            <p></p>
+          </div>
+          <div class="Image">
+            <img
+              src="https://benwinding.github.io/commbook-mock/pages/conversations.png"
+              width="410"
+              height="734"
+              usemap="#map_conversations"
+              id="conversations_page_image"
+            />
+            <div class="ImageFooter"></div>
+            <map name="map_conversations"
+              ><area
+                shape="rect"
+                coords="0,56,410,128"
+                href="#convo1_page"
+                title="Go to page 'convo-1'"/><area
+                shape="rect"
+                coords="-15,0,429,56"
+                href="#side_menu_view_page"
+                title="Go to page 'Side Menu View'"
+            /></map>
+          </div>
+        </div>
+        <div class="Page" id="convo1_page">
+          <div class="Texts"><h2 class="Title">convo-1</h2></div>
+          <div class="Image">
+            <img
+              src="https://benwinding.github.io/commbook-mock/pages/convo1.png"
+              width="410"
+              height="734"
+              usemap="#map_convo1"
+              id="convo1_page_image"
+            />
+            <div class="ImageFooter"></div>
+            <map name="map_convo1"
+              ><area
+                shape="rect"
+                coords="-15,0,429,56"
+                href="#conversations_page"
+                title="Go to page 'Conversations'"
+            /></map>
+          </div>
+        </div>
+        <div class="Page" id="side_menu_view_page">
+          <div class="Texts">
+            <h2 class="Title">Side Menu View</h2>
+            <p class="Note"></p>
+            <div>
+              The side menu, reveals the other options a user can navigate to.
+            </div>
+            <p></p>
+          </div>
+          <div class="Image">
+            <img
+              src="https://benwinding.github.io/commbook-mock/pages/side_menu_view.png"
+              width="410"
+              height="734"
+              usemap="#map_side_menu_view"
+              id="side_menu_view_page_image"
+            />
+            <div class="ImageFooter"></div>
+            <map name="map_side_menu_view"
+              ><area
+                shape="rect"
+                coords="168.40000915527344,56,411.400024414062,741"
+                href="#conversations_page"
+                title="Go to page 'Conversations'"/><area
+                shape="rect"
+                coords="0,56,410,128"
+                href="#convo1_page"
+                title="Go to page 'convo-1'"/><area
+                shape="rect"
+                coords="-15,0,429,56"
+                href="#side_menu_view_page"
+                title="Go to page 'Side Menu View'"
+            /></map>
+          </div>
+        </div>
+        <div id="navigator">
+          <div class="NavLink" id="prevLink">
+            <div class="Wrapper"><a href="#"> </a></div>
+          </div>
+          <div class="NavLink NavNextLink" id="nextLink">
+            <div class="Wrapper"><a href="#"> </a></div>
+          </div>
+        </div>
+      </div>
+      <div id="footer"></div>
+    </div>
     <script src="/Resources/main.js"></script>
   </body>
 </html>
