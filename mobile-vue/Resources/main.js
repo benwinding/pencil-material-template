@@ -17,7 +17,7 @@ Vue.component('screen', {
         v-bind:src="currentPage.src"
         />
       </div>
-      <div class="screen-btns-overlay" v-on:click="highlightBtnAreas()">
+      <div class="screen-btns-overlay">
         <router-link
           v-for="area in currentPage.areas"
           v-bind:class="{ highlight: highlightBtns}"
@@ -35,20 +35,37 @@ Vue.component('screen', {
           :coords="area.coords"
         >
         </router-link>
+        <div 
+          class="screen-btn-flash-overlay" 
+          @click.stop="highlightBtnAreas()"
+        >
+        </div>
       </div>
     </md-card>  
   `,
   data: function() {
     return {
-      highlightBtns: false
+      highlightBtns: false,
+      highlightIsActive: false
     };
   },
   methods: {
     highlightBtnAreas() {
+      if (this.highlightIsActive) {
+        return;
+      }
       this.highlightBtns = true;
+      this.highlightIsActive = true;
       setTimeout(() => {
         this.highlightBtns = false;
-      }, 1000);
+      }, 300);
+      setTimeout(() => {
+        this.highlightBtns = true;
+      }, 600);
+      setTimeout(() => {
+        this.highlightBtns = false;
+        this.highlightIsActive = false;
+      }, 700);
     }
   }
 });
@@ -57,6 +74,27 @@ Vue.component('infopanel', {
   props: ['currentIndex', 'maxIndex', 'currentPage'],
   template: `
     <md-card md-with-hover>
+      <md-toolbar class="">
+        <div class="md-toolbar-row">
+          <md-button 
+            class="md-icon-button md-raised md-primary" 
+            v-on:click="$emit('prevPage')"
+            v-bind:disabled="currentIndex <= 0"
+          >
+            <md-icon>chevron_left</md-icon>
+            <md-tooltip md-direction="top">Previous Page</md-tooltip>
+          </md-button>
+          <pre>[{{ currentIndex+1 }}/{{ maxIndex+1 }}]</pre>
+          <md-button 
+            class="md-icon-button md-raised md-primary" 
+            v-on:click="$emit('nextPage')"
+            v-bind:disabled="currentIndex >= maxIndex"
+          >
+            <md-icon>chevron_right</md-icon>
+            <md-tooltip md-direction="top">Next Page</md-tooltip>
+          </md-button>
+        </div>
+      </md-toolbar>
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">{{ currentPage.title }}</div>
@@ -64,25 +102,6 @@ Vue.component('infopanel', {
       </md-card-header>
       <md-card-content v-html="currentPage.note">
       </md-card-content>
-      <md-card-actions>
-        <md-button 
-          class="md-icon-button md-raised md-primary" 
-          v-on:click="$emit('prevPage')"
-          v-bind:disabled="currentIndex <= 0"
-        >
-          <md-icon>chevron_left</md-icon>
-          <md-tooltip md-direction="top">Previous Page</md-tooltip>
-        </md-button>
-        <pre>[{{currentIndex}}/2]</pre>
-        <md-button 
-          class="md-icon-button md-raised md-primary" 
-          v-on:click="$emit('nextPage')"
-          v-bind:disabled="currentIndex >= maxIndex"
-        >
-          <md-icon>chevron_right</md-icon>
-          <md-tooltip md-direction="top">Next Page</md-tooltip>
-        </md-button>
-      </md-card-actions>
     </md-card>  
   `
 });
@@ -109,9 +128,7 @@ const App = {
         <div class="md-toolbar-row app-toolbar">
         </div>
       </md-toolbar>
-      <div class="app-screen md-layout md-alignment-center">
-        <div class="app-background">
-        </div>
+      <div class="app-screen md-layout">
         <div class="md-layout-item md-xlarge-size-70 md-large-size-60 md-xsmall-size-100">
           <div class="screen-container">
             <screen 

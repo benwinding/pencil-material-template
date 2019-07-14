@@ -37,6 +37,13 @@
   top: 0;
   bottom: 0;
 }
+.screen-btn-flash-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 
 .screen-card {
   width: 100%;
@@ -67,14 +74,15 @@
 }
 .screen-btn {
   position: absolute;
-  transition: all 2s ease;
-  opacity: 0;
+  transition: all 2.0s ease;
+  background-color: rgba(255, 128, 128, 0.0);
+  border: rgb(25, 0, 255, 0) solid 5px;
+  z-index: 9;
 }            
 
 .highlight {
-  background-color: rgba(255, 128, 128, 0.333);
-  border: red solid 5px; 
-  opacity: 1;
+  background-color: rgba(76, 116, 246, 0.533);
+  border: rgb(25, 0, 255, 0.35) solid 5px; 
 }
 
 @media (max-width: 599px) {
