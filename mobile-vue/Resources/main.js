@@ -17,16 +17,16 @@ Vue.component('screen', {
         v-bind:src="currentPage.src"
         />
       </div>
-      <div v-if="highlightBtns" class="screen-btns-overlay">
+      <div class="screen-btns-overlay" v-on:click="highlightBtnAreas()">
         <router-link
           v-for="area in currentPage.areas"
+          v-bind:class="{ highlight: highlightBtns}"
+          class="screen-btn"
           :style="{
-            position: 'absolute',
             left: area.pos_left,
             top: area.pos_top,
             right: area.pos_right,
             bottom: area.pos_bottom,
-            background: 'rgba(255, 128, 128, 0.333)'
           }"
           :key="area.href"
           :to="area.id"
@@ -40,7 +40,7 @@ Vue.component('screen', {
   `,
   data: function() {
     return {
-      highlightBtns: true
+      highlightBtns: false
     };
   },
   methods: {
@@ -106,8 +106,12 @@ const App = {
             </md-button>
           </div>
         </div>
+        <div class="md-toolbar-row app-toolbar">
+        </div>
       </md-toolbar>
       <div class="app-screen md-layout md-alignment-center">
+        <div class="app-background">
+        </div>
         <div class="md-layout-item md-xlarge-size-70 md-large-size-60 md-xsmall-size-100">
           <div class="screen-container">
             <screen 
