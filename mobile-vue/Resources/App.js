@@ -68,21 +68,28 @@ const App = {
     }
   },
   mounted() {
-    if (this.screenType !== 'mobile' && this.screenType !== 'desktop') {
-      this.gotoView('mobile', this.currentPageId);
-    }
+    this.ensureViewValid();
+    this.ensureIdValid();
     const matching = pages.find(p => p.id === this.currentPageId);
-    const pageIdExists = !!matching;
-    if (!pageIdExists) {
-      const p = pages[0];
-      this.gotoView(this.screenType, p.id);
-    }
     this.currentIndex = matching.index;
     setTimeout(() => {
       this.show = true;
     }, 10);
   },
   methods: {
+    ensureViewValid() {
+      if (this.screenType !== 'mobile' && this.screenType !== 'desktop') {
+        this.gotoView('mobile', this.currentPageId);
+      }
+    },
+    ensureIdValid() {
+      const matching = pages.find(p => p.id === this.currentPageId);
+      const pageIdExists = !!matching;
+      if (!pageIdExists) {
+        const p = pages[0];
+        this.gotoView(this.screenType, p.id);
+      }
+    },
     gotoView(view, id) {
       this.$router.push(`/${view}/${id}`);
     },

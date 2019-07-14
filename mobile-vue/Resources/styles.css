@@ -44,6 +44,7 @@
   right: 0;
   top: 0;
   bottom: 0;
+  cursor: url(pointer-not.png) 15 15, auto;
 }
 
 .screen-card {
@@ -80,6 +81,7 @@
   background-color: rgba(255, 128, 128, 0);
   border: rgb(25, 0, 255, 0) solid 5px;
   z-index: 9;
+  cursor: url(pointer.png) 15 15, auto;
 }
 
 .highlight {
