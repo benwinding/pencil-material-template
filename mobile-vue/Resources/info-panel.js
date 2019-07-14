@@ -3,7 +3,9 @@ Vue.component('info-panel', {
   template: `
     <md-card md-with-hover>
       <md-toolbar>
-        <div class="md-toolbar-row">
+        <div class="md-toolbar-row" style="flex: 1">
+          <div class="spacer">
+          </div>
           <md-button 
             class="md-icon-button md-raised md-primary" 
             v-on:click="$emit('prevPage')"

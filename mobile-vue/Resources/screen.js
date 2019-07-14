@@ -1,19 +1,71 @@
-Vue.component('screen', {
+Vue.component('mobile', {
   props: ['currentPage'],
   template: `
-    <md-card class="screen-card">
-      <span class="screen-url">https://www.example.com/</span>
+    <div>
+      <span class="screen-url">https://www.mobile.com/</span>
       <md-icon class="screen-x">clear</md-icon>
       <div class="img-container">
         <img
-        class="screen-img"
-        v-bind:src="currentPage.src"
+          class="screen-img"
+          :src="currentPage.src"
         />
       </div>
+    </div>
+  `
+});
+
+Vue.component('tablet', {
+  props: ['currentPage'],
+  template: `
+    <div>
+      <span class="screen-url">https://www.tablet.com/</span>
+      <md-icon class="screen-x">clear</md-icon>
+      <div class="img-container">
+        <img
+          class="screen-img"
+          :src="currentPage.src"
+        />
+      </div>
+    </div>
+  `
+});
+
+Vue.component('desktop', {
+  props: ['currentPage'],
+  template: `
+    <div>
+      <span class="screen-url">https://www.browser.com/</span>
+      <md-icon class="screen-x">clear</md-icon>
+      <div class="img-container">
+        <img
+          class="screen-img"
+          :src="currentPage.src"
+        />
+      </div>
+    </div>
+  `
+});
+
+Vue.component('screen', {
+  props: ['currentPage', 'isMobile', 'isTablet', 'isDesktop'],
+  template: `
+    <md-card class="screen-card">
+      <mobile 
+        :currentPage="currentPage" 
+        v-if="isMobile" 
+      />
+      <tablet 
+        :currentPage="currentPage" 
+        v-if="isTablet" 
+      />
+      <desktop 
+        :currentPage="currentPage" 
+        v-if="isDesktop" 
+      />
       <div class="screen-btns-overlay">
         <router-link
           v-for="area in currentPage.areas"
-          v-bind:class="{ highlight: highlightBtns}"
+          :class="{ highlight: highlightBtns}"
           class="screen-btn"
           :style="{
             left: area.pos_left,
