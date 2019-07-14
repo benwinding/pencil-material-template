@@ -51,6 +51,7 @@
   border: #ccc solid 4px;
   border-radius: 10px;
   border-top-width: 30px;
+  position: relative;
 }
 .screen-url {
   cursor: default !important;
@@ -107,4 +108,22 @@
 }
 .spacer {
   width: 100%;
+}
+
+/* SCREEN BORDERS */
+
+.screen-border {
+  position: relative;
+  width: 100%;
+}
+.screen-mobile {
+  border: #333 solid 4px;
+  border-radius: 10px;
+  border-top-width: 30px;
+  border-bottom-width: 30px;
+}
+.screen-desktop {
+  border: #ccc solid 4px;
+  border-radius: 10px;
+  border-top-width: 30px;
 }

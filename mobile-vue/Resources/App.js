@@ -12,10 +12,8 @@ const App = {
       <topbar 
         :screenType="screenType"
         :isMobile="isMobile"
-        :isTablet="isTablet"
         :isDesktop="isDesktop"
         v-on:mobile="screenType = 'mobile'"
-        v-on:tablet="screenType = 'tablet'"
         v-on:desktop="screenType = 'desktop'"
       />
       <transition name="slide-fade">
@@ -25,7 +23,6 @@ const App = {
               <screen 
                 :currentPage="currentPage" 
                 :isMobile="isMobile"
-                :isTablet="isTablet"
                 :isDesktop="isDesktop"
               />
             </div>
@@ -64,9 +61,6 @@ const App = {
     isMobile() {
       return this.screenType === 'mobile';
     },
-    isTablet() {
-      return this.screenType === 'tablet';
-    },
     isDesktop() {
       return this.screenType === 'desktop';
     }
@@ -91,9 +85,6 @@ const App = {
     },
     switchMobile() {
       this.screenType = 'mobile';
-    },
-    switchTablet() {
-      this.screenType = 'tablet';
     },
     switchDesktop() {
       this.screenType = 'desktop';

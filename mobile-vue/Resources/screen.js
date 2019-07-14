@@ -1,31 +1,8 @@
 Vue.component('mobile', {
   props: ['currentPage'],
   template: `
-    <div>
-      <span class="screen-url">https://www.mobile.com/</span>
-      <md-icon class="screen-x">clear</md-icon>
-      <div class="img-container">
-        <img
-          class="screen-img"
-          :src="currentPage.src"
-        />
-      </div>
-    </div>
-  `
-});
-
-Vue.component('tablet', {
-  props: ['currentPage'],
-  template: `
-    <div>
-      <span class="screen-url">https://www.tablet.com/</span>
-      <md-icon class="screen-x">clear</md-icon>
-      <div class="img-container">
-        <img
-          class="screen-img"
-          :src="currentPage.src"
-        />
-      </div>
+    <div class="screen-border screen-mobile">
+      <slot />
     </div>
   `
 });
@@ -33,35 +10,24 @@ Vue.component('tablet', {
 Vue.component('desktop', {
   props: ['currentPage'],
   template: `
-    <div>
+    <div class="screen-border screen-desktop">
       <span class="screen-url">https://www.browser.com/</span>
       <md-icon class="screen-x">clear</md-icon>
+      <slot />
+    </div>
+  `
+});
+
+Vue.component('screen-img', {
+  props: ['currentPage'],
+  template: `
+    <div>
       <div class="img-container">
         <img
           class="screen-img"
           :src="currentPage.src"
         />
       </div>
-    </div>
-  `
-});
-
-Vue.component('screen', {
-  props: ['currentPage', 'isMobile', 'isTablet', 'isDesktop'],
-  template: `
-    <md-card class="screen-card">
-      <mobile 
-        :currentPage="currentPage" 
-        v-if="isMobile" 
-      />
-      <tablet 
-        :currentPage="currentPage" 
-        v-if="isTablet" 
-      />
-      <desktop 
-        :currentPage="currentPage" 
-        v-if="isDesktop" 
-      />
       <div class="screen-btns-overlay">
         <router-link
           v-for="area in currentPage.areas"
@@ -85,8 +51,8 @@ Vue.component('screen', {
           @click.stop="highlightBtnAreas()"
         >
         </div>
-      </div>
-    </md-card>  
+      </div>  
+    </div>
   `,
   data: function() {
     return {
@@ -113,4 +79,18 @@ Vue.component('screen', {
       }, 700);
     }
   }
+});
+
+Vue.component('screen', {
+  props: ['currentPage', 'isMobile', 'isDesktop'],
+  template: `
+    <div>
+      <mobile v-if="isMobile" >
+        <screen-img :currentPage="currentPage" />
+      </mobile>
+      <desktop v-if="isDesktop" >
+        <screen-img :currentPage="currentPage" />
+      </desktop>
+    </div>  
+  `
 });
