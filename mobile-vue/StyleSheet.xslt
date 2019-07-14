@@ -82,8 +82,13 @@
     </div>
   </xsl:template>
   <xsl:template match="p:Link">
-    <area shape="rect"
-            coords="{@x},{@y},{@x+@w},{@y+@h}" href="#{@targetFid}_page" title="Go to page '{@targetName}'"/>
+    <area 
+      shape="rect"
+      coords="{@x},{@y},{@x+@w},{@y+@h}" 
+      id="{@targetFid}_page" 
+      href="#{@targetFid}_page" 
+      title="Go to page '{@targetName}'"
+    />
   </xsl:template>
   <xsl:template match="html:*" mode="processing-notes">
     <xsl:copy>

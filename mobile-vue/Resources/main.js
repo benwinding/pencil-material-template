@@ -8,61 +8,82 @@ console.log({ title, pages });
 Vue.component('screen', {
   props: ['currentPage'],
   template: `
-  <md-card class="screen-card">
-    <span class="screen-url">https://www.example.com/</span>
-    <md-icon class="screen-x">clear</md-icon>
-    <img
-      class="screen-img"
-      width="145" height="126" 
-      v-bind:src="currentPage.src"
-      usemap="#btnmap" 
-    />
-    <map name="btnmap">
-      <area
-        v-for="p in currentPage.areas"
-        :id="p.href"
-        :href="p.href"
-        :shape="p.shape"
-        :href="p.href"
-        :alt="p.title"
-        :coords="p.coords"
+    <md-card class="screen-card">
+      <span class="screen-url">https://www.example.com/</span>
+      <md-icon class="screen-x">clear</md-icon>
+      <img
+        class="screen-img"
+        width="145" height="126" 
+        v-bind:src="currentPage.src"
       />
-    </map>
-  </md-card>  
-  `
+      <div v-if="highlightBtns" class="screen-btns-overlay">
+        <router-link
+          v-for="area in currentPage.areas"
+          :style="{
+            position: 'absolute',
+            left: area.pos_left,
+            top: area.pos_top,
+            right: area.pos_right,
+            bottom: area.pos_bottom,
+            background: 'rgba(255, 128, 128, 0.333)'
+          }"
+          :key="area.href"
+          :to="area.id"
+          :shape="area.shape"
+          :alt="area.title"
+          :coords="area.coords"
+        >
+        </router-link>
+      </div>
+    </md-card>  
+  `,
+  data: function() {
+    return {
+      highlightBtns: true
+    };
+  },
+  methods: {
+    highlightBtnAreas() {
+      this.highlightBtns = true;
+      setTimeout(() => {
+        this.highlightBtns = false;
+      }, 1000);
+    }
+  }
 });
 
 Vue.component('infopanel', {
   props: ['currentIndex', 'maxIndex', 'currentPage'],
   template: `
-<md-card md-with-hover>
-   <md-card-header>
-      <md-card-header-text>
-         <div class="md-title">{{ currentPage.title }}</div>
-      </md-card-header-text>
-   </md-card-header>
-   <md-card-content v-html="currentPage.note">
-   </md-card-content>
-   <md-card-actions>
-      <md-button 
-        class="md-icon-button md-raised md-primary" 
-        v-on:click="$emit('prevPage')"
-        v-bind:disabled="currentIndex <= 0"
-      >
-        <md-icon>chevron_left</md-icon>
-        <md-tooltip md-direction="top">Previous Page</md-tooltip>
-      </md-button>
-      <pre>[{{currentIndex}}/2]</pre>
-      <md-button 
-        class="md-icon-button md-raised md-primary" 
-        v-on:click="$emit('nextPage')"
-        v-bind:disabled="currentIndex >= maxIndex"
-      >
-        <md-icon>chevron_right</md-icon>
-        <md-tooltip md-direction="top">Next Page</md-tooltip>
-      </md-button>
-   </md-card-actions>
-</md-card>  `
+    <md-card md-with-hover>
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">{{ currentPage.title }}</div>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content v-html="currentPage.note">
+      </md-card-content>
+      <md-card-actions>
+        <md-button 
+          class="md-icon-button md-raised md-primary" 
+          v-on:click="$emit('prevPage')"
+          v-bind:disabled="currentIndex <= 0"
+        >
+          <md-icon>chevron_left</md-icon>
+          <md-tooltip md-direction="top">Previous Page</md-tooltip>
+        </md-button>
+        <pre>[{{currentIndex}}/2]</pre>
+        <md-button 
+          class="md-icon-button md-raised md-primary" 
+          v-on:click="$emit('nextPage')"
+          v-bind:disabled="currentIndex >= maxIndex"
+        >
+          <md-icon>chevron_right</md-icon>
+          <md-tooltip md-direction="top">Next Page</md-tooltip>
+        </md-button>
+      </md-card-actions>
+    </md-card>  
+  `
 });
 
 const App = {
@@ -109,38 +130,59 @@ const App = {
   `,
   data: function() {
     return {
-      currentIndex: 0,
-      maxIndex: pages.length - 1
+      maxIndex: pages.length - 1,
+      currentIndex: 0
     };
   },
   computed: {
     currentPage() {
-      return pages[this.currentIndex];
+      const matching = pages.find(p => p.id === this.currentPageId);
+      return matching;
+    },
+    currentPageId() {
+      return this.$route.params.id;
     }
+  },
+  watch:{
+    $route: function(to, from) {
+      console.log({to, from})
+    }
+  },
+  mounted() {
+    const matching = pages.find(p => p.id === this.currentPageId);
+    this.currentIndex = matching.index;
   },
   methods: {
     decrementPage() {
       this.currentIndex--;
+      const p = pages[this.currentIndex];
+      this.$router.push(p.id);
     },
     incrementPage() {
       this.currentIndex++;
+      const p = pages[this.currentIndex];
+      this.$router.push(p.id);
     }
   }
 };
 
+const router = new VueRouter({
+  routes: [
+    { path: '/:id', component: App },
+    { path: '/', redirect: '/start' }
+  ]
+});
+
 new Vue({
-  render: h => h(App)
+  router: router
 }).$mount(`#app`);
 
 // Get data
-
 function getData() {
   // Get page
   const page = document.querySelector('#page');
-
   // Get title
   const title = page.querySelector('#documentTitle span').textContent;
-
   // Get all pages
   const pagesElements = page.querySelectorAll('.Page');
   const pages = [];
@@ -154,15 +196,28 @@ function getData() {
     if (hasNotes) {
       notes = p.querySelector('.Texts .Note').nextElementSibling.innerHTML;
     }
-    const pageImg = p.querySelector('.Image img').src;
+    const pageImg = p.querySelector('.Image img');
     const pageImgMap = p.querySelector('.Image map');
     const hasMaps = !!pageImgMap;
     const areas = Array.from(pageImgMap.areas);
+    const iW = pageImg.width;
+    const iH = pageImg.height;
     const areasMap = areas.map(area => {
+      const area_arr = area.coords.split(',');
+      const x0 = area_arr[0];
+      const y0 = area_arr[1];
+      const x1 = area_arr[2];
+      const y1 = area_arr[3];
       return {
         shape: area.shape,
         coords: area.coords,
+        pos_left: (100 * x0 / iW) + '%',
+        pos_top: (100 * y0 / iH) + '%',
+        pos_right: (100 * (iW - x1) / iW) + '%',
+        pos_bottom: (100 * (iH - y1) / iH) + '%',
         href: area.href,
+        id: area.id,
+        href_index: i,
         title: area.title,
       }
     })
@@ -173,12 +228,11 @@ function getData() {
       id: p.id,
       title: pageTitle,
       note: notes,
-      src: pageImg,
+      src: pageImg.src,
       areas: areasMap,
       index: i
     });
   }
-
   // Return data
   return {
     title: title,

@@ -22,7 +22,9 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <router-view></router-view>
+    </div>
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
     <script src="https://unpkg.com/vue-router@3.0.7/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vue-material@1.0.0-beta-11/dist/vue-material.min.js"></script>
@@ -54,12 +56,14 @@
                 shape="rect"
                 coords="0,56,410,128"
                 href="#convo1_page"
+                id="convo1_page"
                 title="Go to page 'convo-1'"
               />
               <area
                 shape="rect"
                 coords="-15,0,429,56"
                 href="#side_menu_view_page"
+                id="side_menu_view_page"
                 title="Go to page 'Side Menu View'"
               />
             </map>
@@ -81,6 +85,7 @@
                 shape="rect"
                 coords="-15,0,429,56"
                 href="#conversations_page"
+                id="conversations_page"
                 title="Go to page 'Conversations'"
             /></map>
           </div>
@@ -103,21 +108,26 @@
               id="side_menu_view_page_image"
             />
             <div class="ImageFooter"></div>
-            <map name="map_side_menu_view"
-              ><area
+            <map name="map_side_menu_view">
+              <area
                 shape="rect"
                 coords="168.40000915527344,56,411.400024414062,741"
                 href="#conversations_page"
-                title="Go to page 'Conversations'"/><area
+                id="conversations_page"
+                title="Go to page 'Conversations'"/>
+              <area
                 shape="rect"
                 coords="0,56,410,128"
                 href="#convo1_page"
-                title="Go to page 'convo-1'"/><area
+                id="convo1_page"
+                title="Go to page 'convo-1'"/>
+              <area
                 shape="rect"
                 coords="-15,0,429,56"
                 href="#side_menu_view_page"
-                title="Go to page 'Side Menu View'"
-            /></map>
+                id="side_menu_view_page"
+                title="Go to page 'Side Menu View'"/>
+            </map>
           </div>
         </div>
         <div id="navigator">
