@@ -1,8 +1,0 @@
-<Template xmlns="http://www.evolus.vn/Namespace/Pencil">
-    <Property name="id">Material:Design:Mobile-Vue</Property>
-    <Property name="name">Material Design Mobile - Vue</Property>
-    <Property name="author">Ben Winding</Property>
-    <Property name="description">Material designed template adapted for mobile</Property>
-    
-    <Property name="styleSheet">StyleSheet.xslt</Property>
-</Template>

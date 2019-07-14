@@ -8,7 +8,7 @@ popd
 pushd desktop/
 zip -r ../build/pencil-material-template-desktop.zip .
 popd
-# Build mobile-vue
-pushd mobile-vue/
-zip -r ../build/pencil-material-template-mobile-vue.zip .
+# Build selectable
+pushd selectable/
+zip -r ../build/pencil-material-template-selectable.zip .
 popd

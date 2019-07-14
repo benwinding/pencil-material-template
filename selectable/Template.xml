@@ -1,0 +1,7 @@
+<Template xmlns="http://www.evolus.vn/Namespace/Pencil">
+    <Property name="id">Material:Design:Selectable</Property>
+    <Property name="name">Material Design - Selectable Template</Property>
+    <Property name="author">Ben Winding</Property>
+    <Property name="description">Material designed template adapted for mobile/desktop</Property>
+    <Property name="styleSheet">StyleSheet.xslt</Property>
+</Template>

@@ -24,7 +24,10 @@
       rel="stylesheet"
       href="https://unpkg.com/vue-material/dist/theme/default.css"
     />
-        <link rel="stylesheet" href="/Resources/styles.css" />
+        <link rel="icon" 
+      type="image/png" 
+      href="/assets/icon.png">
+        <link rel="stylesheet" href="/assets/styles.css" />
       </head>
       <body>
         <div id="app"></div>
@@ -54,10 +57,10 @@
           </div>
           <div id="footer"></div>
         </div>
-        <script src="/Resources/topbar.js"></script>
-        <script src="/Resources/info-panel.js"></script>
-        <script src="/Resources/screen.js"></script>
-        <script src="/Resources/App.js"></script>
+        <script src="/components/topbar.js"></script>
+        <script src="/components/info-panel.js"></script>
+        <script src="/components/screen.js"></script>
+        <script src="/components/App.js"></script>
       </body>
     </html>
   </xsl:template>
