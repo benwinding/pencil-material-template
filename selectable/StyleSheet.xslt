@@ -26,14 +26,13 @@
     />
         <link rel="icon" 
       type="image/png" 
-      href="/assets/icon.png">
+      href="/assets/icon.png" />
         <link rel="stylesheet" href="/assets/styles.css" />
       </head>
       <body>
-        <div id="app"></div>
-        <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="https://unpkg.com/vue-router@3.0.7/dist/vue-router.js"></script>
-        <script src="https://unpkg.com/vue-material@1.0.0-beta-11/dist/vue-material.min.js"></script>
+        <div id="app">
+          <router-view></router-view>
+        </div>
         <div style="display: none;" id="page">
           <div id="content">
             <h1 id="documentTitle">
@@ -57,6 +56,9 @@
           </div>
           <div id="footer"></div>
         </div>
+        <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/vue-router@3.0.7/dist/vue-router.js"></script>
+        <script src="https://unpkg.com/vue-material@1.0.0-beta-11/dist/vue-material.min.js"></script>
         <script src="/components/topbar.js"></script>
         <script src="/components/info-panel.js"></script>
         <script src="/components/screen.js"></script>
