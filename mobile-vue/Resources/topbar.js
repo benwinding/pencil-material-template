@@ -21,7 +21,7 @@ Vue.component('topbar', {
               </md-menu-item>
             </md-menu-content>
           </md-menu>
-          <span class="md-title">{{title}}</span>
+          <span class="md-title">{{ title }}</span>
         </div>
       </div>
       <div class="md-toolbar-row app-toolbar">

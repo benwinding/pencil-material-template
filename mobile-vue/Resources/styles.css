@@ -76,15 +76,15 @@
 }
 .screen-btn {
   position: absolute;
-  transition: all 2.0s ease;
-  background-color: rgba(255, 128, 128, 0.0);
+  transition: all 2s ease;
+  background-color: rgba(255, 128, 128, 0);
   border: rgb(25, 0, 255, 0) solid 5px;
   z-index: 9;
-}            
+}
 
 .highlight {
   background-color: rgba(76, 116, 246, 0.533);
-  border: rgb(25, 0, 255, 0.35) solid 5px; 
+  border: rgb(25, 0, 255, 0.35) solid 5px;
 }
 
 @media (max-width: 599px) {
@@ -118,12 +118,38 @@
 }
 .screen-mobile {
   border: #333 solid 4px;
-  border-radius: 10px;
+  border-radius: 14px;
   border-top-width: 30px;
-  border-bottom-width: 30px;
+  border-bottom-width: 40px;
 }
 .screen-desktop {
   border: #ccc solid 4px;
   border-radius: 10px;
   border-top-width: 30px;
+}
+.mobile-top-slot {
+  background-color: #555;
+  position: absolute;
+  width: 100px;
+  height: 4px;
+  border-radius: 2px;
+  top: -17px;
+  left: calc(50% - 50px);
+}
+.mobile-bottom-btn {
+  background: radial-gradient(
+    ellipse at center,
+    #222 0%,
+    #0d0d0d 46%,
+    #010101 50%,
+    #0a0a0a 53%,
+    #383838 87%,
+    #1b1b1b 100%
+  );
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  bottom: -30px;
+  left: calc(50% - 13px);
 }

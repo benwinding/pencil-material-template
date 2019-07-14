@@ -13,8 +13,8 @@ const App = {
         :screenType="screenType"
         :isMobile="isMobile"
         :isDesktop="isDesktop"
-        v-on:mobile="screenType = 'mobile'"
-        v-on:desktop="screenType = 'desktop'"
+        v-on:mobile="switchMobile()"
+        v-on:desktop="switchDesktop()"
       />
       <transition name="slide-fade">
         <div v-if="show" class="app-screen md-layout">
@@ -46,7 +46,6 @@ const App = {
     return {
       maxIndex: pages.length - 1,
       currentIndex: 0,
-      screenType: 'mobile',
       show: false
     };
   },
@@ -58,6 +57,9 @@ const App = {
     currentPageId() {
       return this.$route.params.id;
     },
+    screenType() {
+      return this.$route.params.view;
+    },
     isMobile() {
       return this.screenType === 'mobile';
     },
@@ -66,13 +68,24 @@ const App = {
     }
   },
   mounted() {
+    if (this.screenType !== 'mobile' && this.screenType !== 'desktop') {
+      this.gotoView('mobile', this.currentPageId);
+    }
     const matching = pages.find(p => p.id === this.currentPageId);
+    const pageIdExists = !!matching;
+    if (!pageIdExists) {
+      const p = pages[0];
+      this.gotoView(this.screenType, p.id);
+    }
     this.currentIndex = matching.index;
     setTimeout(() => {
       this.show = true;
     }, 10);
   },
   methods: {
+    gotoView(view, id) {
+      this.$router.push(`/${view}/${id}`);
+    },
     decrementPage() {
       this.currentIndex--;
       const p = pages[this.currentIndex];
@@ -84,18 +97,18 @@ const App = {
       this.$router.push(p.id);
     },
     switchMobile() {
-      this.screenType = 'mobile';
+      this.gotoView('mobile', this.currentPageId);
     },
     switchDesktop() {
-      this.screenType = 'desktop';
+      this.gotoView('desktop', this.currentPageId);
     }
   }
 };
 
 const router = new VueRouter({
   routes: [
-    { path: '/:id', component: App },
-    { path: '/', redirect: '/start' }
+    { path: '/:view/:id', component: App },
+    { path: '/', redirect: '/browser/start' }
   ]
 });
 

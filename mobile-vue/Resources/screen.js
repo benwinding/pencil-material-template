@@ -2,6 +2,8 @@ Vue.component('mobile', {
   props: ['currentPage'],
   template: `
     <div class="screen-border screen-mobile">
+      <div class="mobile-top-slot"></div>
+      <div class="mobile-bottom-btn"></div>
       <slot />
     </div>
   `
