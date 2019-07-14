@@ -54,7 +54,10 @@
           </div>
           <div id="footer"></div>
         </div>
-        <script src="/Resources/main.js"></script>
+        <script src="/Resources/topbar.js"></script>
+        <script src="/Resources/info-panel.js"></script>
+        <script src="/Resources/screen.js"></script>
+        <script src="/Resources/App.js"></script>
       </body>
     </html>
   </xsl:template>

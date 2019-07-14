@@ -5,11 +5,12 @@
 .app-screen {
   margin: auto;
   max-width: 1200px;
-  width: 100%;
   height: calc(100vh - 64px);
   position: absolute;
   top: 50px;
   z-index: 9;
+  left: 0;
+  right: 0;
 }
 .screen-container {
   margin: 10px;
@@ -95,4 +96,12 @@
     max-width: unset;
     margin: 10px;
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 1s ease;
+}
+.slide-fade-enter {
+  transform: translateY(-100px);
+  opacity: 0;
 }
