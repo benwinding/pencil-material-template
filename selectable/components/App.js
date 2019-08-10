@@ -150,7 +150,6 @@ function getData() {
     if (!!pageImgMap) {
       areas = Array.from(pageImgMap.areas);
     }
-    const areas = Array.from(pageImgMap.areas);
     const iW = pageImg.width;
     const iH = pageImg.height;
     const areasMap = areas.map(area => {
