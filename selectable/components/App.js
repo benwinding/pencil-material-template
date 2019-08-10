@@ -146,7 +146,10 @@ function getData() {
     }
     const pageImg = p.querySelector('.Image img');
     const pageImgMap = p.querySelector('.Image map');
-    const hasMaps = !!pageImgMap;
+    let areas = [];
+    if (!!pageImgMap) {
+      areas = Array.from(pageImgMap.areas);
+    }
     const areas = Array.from(pageImgMap.areas);
     const iW = pageImg.width;
     const iH = pageImg.height;
@@ -169,9 +172,6 @@ function getData() {
         title: area.title,
       }
     })
-    if (hasMaps) {
-      pageImgMap;
-    }
     pages.push({
       id: p.id,
       title: pageTitle,
