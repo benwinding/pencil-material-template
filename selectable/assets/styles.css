@@ -14,6 +14,7 @@
 }
 .screen-container {
   margin: 10px;
+  width: calc(100% - 20px);
   max-width: fit-content;
   float: right;
 }
@@ -30,6 +31,7 @@
 .screen-img {
   border-radius: 0px 0px 5px 5px;
   max-height: 80vh;
+  width: 100%;
 }
 .screen-btns-overlay {
   position: absolute;
